@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: mindmirror-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mindmirror
+      MONGO_INITDB_ROOT_PASSWORD: mindmirror_secret_2026
+      MONGO_INITDB_DATABASE: mindmirror
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mongo_data:
+    driver: local
