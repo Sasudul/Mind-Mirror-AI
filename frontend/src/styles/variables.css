@@ -1,0 +1,174 @@
+/* ===========================================================
+   MindMirror AI — Design System Variables
+   Mistral AI Inspired: Amber, Sharp Geometry, Golden Shadows
+   =========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ─── Primary Brand ─── */
+  --mm-orange: #FA520F;
+  --mm-flame: #E03E00;
+  --mm-sunshine-300: #FFE4A0;
+  --mm-sunshine-500: #FFC83D;
+  --mm-sunshine-700: #E5A910;
+
+  /* ─── Light Mode Surfaces (Default) ─── */
+  --mm-bg-base: #FFFAEB;       /* Warm Ivory */
+  --mm-bg-surface: #FFFFFF;    /* Pure White */
+  --mm-bg-surface-hover: #FDF6E3;
+  --mm-cream: #FDF6E3;
+  
+  /* ─── Neutrals & Text ─── */
+  --mm-text-primary: #111111;
+  --mm-text-secondary: #4A4A4A;
+  --mm-text-muted: #888888;
+  --mm-text-on-dark: #FFFFFF;
+  --mm-black: #111111;
+  --mm-charcoal: #2A2A2A;
+
+  /* ─── Borders & Dividers ─── */
+  --mm-border-subtle: rgba(0, 0, 0, 0.1);
+  --mm-border-strong: rgba(0, 0, 0, 0.2);
+  --mm-border-glow: rgba(250, 82, 15, 0.3);
+
+  /* ─── Overlays ─── */
+  --mm-overlay-white: rgba(255, 255, 255, 0.7);
+  --mm-overlay-dark: rgba(0, 0, 0, 0.5);
+  --mm-backdrop-blur: 12px;
+
+  /* ─── Semantic Colors ─── */
+  --mm-success: #10b981;
+  --mm-warning: #f59e0b;
+  --mm-danger: #ef4444;
+  --mm-info: #3b82f6;
+
+  /* ─── Emotion Colors ─── */
+  --mm-emotion-happy: #F59E0B;
+  --mm-emotion-sad: #6366F1;
+  --mm-emotion-angry: #EF4444;
+  --mm-emotion-surprised: #06B6D4;
+  --mm-emotion-neutral: #9CA3AF;
+  --mm-emotion-fearful: #EC4899;
+  --mm-emotion-disgusted: #84CC16;
+  --mm-emotion-focused: #10B981;
+  --mm-emotion-stressed: #F43F5E;
+  --mm-emotion-burnout: #DC2626;
+
+  /* ─── Typography Scale ─── */
+  --mm-font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --mm-font-heading: 'Outfit', var(--mm-font-family);
+  --mm-font-weight: 400;
+
+  --mm-text-display: 4rem;      
+  --mm-text-section: 3rem;        
+  --mm-text-subheading-lg: 2.25rem;    
+  --mm-text-subheading: 1.5rem;       
+  --mm-text-card-title: 1.25rem;   
+  --mm-text-feature: 1.125rem;        
+  --mm-text-body: 1rem;             
+  --mm-text-caption: 0.875rem;      
+  --mm-text-small: 0.75rem;         
+
+  --mm-leading-display: 1.1;
+  --mm-leading-section: 1.2;
+  --mm-leading-heading: 1.3;
+  --mm-leading-card: 1.4;
+  --mm-leading-body: 1.6;
+  --mm-leading-caption: 1.5;
+
+  --mm-tracking-display: -0.03em;
+  --mm-tracking-tight: -0.02em;
+  --mm-tracking-normal: 0;
+
+  /* ─── Spacing Scale (8px base) ─── */
+  --mm-space-1: 2px;
+  --mm-space-2: 4px;
+  --mm-space-3: 8px;
+  --mm-space-4: 12px;
+  --mm-space-5: 16px;
+  --mm-space-6: 24px;
+  --mm-space-7: 32px;
+  --mm-space-8: 40px;
+  --mm-space-9: 48px;
+  --mm-space-10: 64px;
+  --mm-space-12: 96px;
+
+  /* ─── Layout ─── */
+  --mm-container-max: 1280px;
+  --mm-radius-sm: 2px;
+  --mm-radius: 4px;
+  --mm-radius-lg: 8px;
+  --mm-radius-full: 9999px;
+
+  /* ─── Shadows & Glows ─── */
+  --mm-shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --mm-shadow-glowing: 0 10px 30px -5px rgba(250, 82, 15, 0.15);
+  --mm-shadow-golden: 0 4px 20px rgba(229, 169, 16, 0.15);
+
+  /* ─── Gradients ─── */
+  --mm-gradient-brand: linear-gradient(135deg, var(--mm-orange) 0%, var(--mm-sunshine-700) 100%);
+  --mm-gradient-bg: var(--mm-bg-base);
+
+  /* ─── Transitions ─── */
+  --mm-transition-fast: 150ms ease;
+  --mm-transition-base: 250ms ease;
+  --mm-transition-slow: 400ms ease;
+  --mm-transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ─── Z-Index Scale ─── */
+  --mm-z-base: 0;
+  --mm-z-dropdown: 100;
+  --mm-z-sticky: 200;
+  --mm-z-modal-backdrop: 300;
+  --mm-z-modal: 400;
+  --mm-z-toast: 500;
+  --mm-z-tooltip: 600;
+}
+
+/* ─── Dark Mode Variables ─── */
+:root[data-theme="dark"],
+:root:not([data-theme="light"]) { /* fallback is handled by media query below */ }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --mm-bg-base: #111111;
+    --mm-bg-surface: #1E1E1E;
+    --mm-bg-surface-hover: #2A2A2A;
+    --mm-cream: #1A1A1A;
+    
+    --mm-text-primary: #F9FAFB;
+    --mm-text-secondary: #9CA3AF;
+    --mm-text-muted: #6B7280;
+    
+    --mm-border-subtle: rgba(255, 255, 255, 0.08);
+    --mm-border-strong: rgba(255, 255, 255, 0.15);
+    
+    --mm-shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --mm-shadow-golden: 0 4px 20px rgba(0, 0, 0, 0.5);
+    
+    --mm-overlay-white: rgba(255, 255, 255, 0.05);
+    --mm-overlay-dark: rgba(0, 0, 0, 0.7);
+  }
+}
+
+:root[data-theme="dark"] {
+  --mm-bg-base: #111111;
+  --mm-bg-surface: #1E1E1E;
+  --mm-bg-surface-hover: #2A2A2A;
+  --mm-cream: #1A1A1A;
+  
+  --mm-text-primary: #F9FAFB;
+  --mm-text-secondary: #9CA3AF;
+  --mm-text-muted: #6B7280;
+  
+  --mm-border-subtle: rgba(255, 255, 255, 0.08);
+  --mm-border-strong: rgba(255, 255, 255, 0.15);
+  
+  --mm-shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --mm-shadow-golden: 0 4px 20px rgba(0, 0, 0, 0.5);
+  
+  --mm-overlay-white: rgba(255, 255, 255, 0.05);
+  --mm-overlay-dark: rgba(0, 0, 0, 0.7);
+}
+

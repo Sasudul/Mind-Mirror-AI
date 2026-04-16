@@ -24,3 +24,5 @@ websockets>=14.0,<15.0
 
 # Utilities
 python-dateutil>=2.9.0
+
+google-generativeai

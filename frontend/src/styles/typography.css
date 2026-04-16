@@ -1,0 +1,164 @@
+/* ===========================================================
+   MindMirror AI — Typography System
+   Mistral aesthetic: clean sans, varied weight, tight tracking
+   =========================================================== */
+
+/* ─── Display — Billboard-scale hero text ─── */
+.text-display {
+  font-family: var(--mm-font-heading);
+  font-size: var(--mm-text-display);
+  font-weight: 500;
+  line-height: var(--mm-leading-display);
+  letter-spacing: var(--mm-tracking-display);
+  color: var(--mm-text-primary);
+}
+
+/* ─── Section Heading ─── */
+.text-section {
+  font-family: var(--mm-font-heading);
+  font-size: var(--mm-text-section);
+  font-weight: 500;
+  line-height: var(--mm-leading-section);
+  letter-spacing: var(--mm-tracking-tight);
+  color: var(--mm-text-primary);
+}
+
+/* ─── Sub-heading Large ─── */
+.text-subheading-lg {
+  font-family: var(--mm-font-heading);
+  font-size: var(--mm-text-subheading-lg);
+  font-weight: 500;
+  line-height: var(--mm-leading-section);
+  letter-spacing: var(--mm-tracking-tight);
+  color: var(--mm-text-primary);
+}
+
+/* ─── Sub-heading ─── */
+.text-subheading {
+  font-family: var(--mm-font-family);
+  font-size: var(--mm-text-subheading);
+  font-weight: 500;
+  line-height: var(--mm-leading-heading);
+  letter-spacing: var(--mm-tracking-tight);
+  color: var(--mm-text-primary);
+}
+
+/* ─── Card Title ─── */
+.text-card-title {
+  font-family: var(--mm-font-family);
+  font-size: var(--mm-text-card-title);
+  font-weight: 500;
+  line-height: var(--mm-leading-card);
+  letter-spacing: var(--mm-tracking-normal);
+  color: var(--mm-text-primary);
+}
+
+/* ─── Feature Title ─── */
+.text-feature {
+  font-family: var(--mm-font-family);
+  font-size: var(--mm-text-feature);
+  font-weight: 500;
+  line-height: 1.33;
+  letter-spacing: var(--mm-tracking-normal);
+  color: var(--mm-text-primary);
+}
+
+/* ─── Body ─── */
+.text-body {
+  font-family: var(--mm-font-family);
+  font-size: var(--mm-text-body);
+  font-weight: var(--mm-font-weight);
+  line-height: var(--mm-leading-body);
+  letter-spacing: var(--mm-tracking-normal);
+  color: var(--mm-text-primary);
+}
+
+/* ─── Caption ─── */
+.text-caption {
+  font-family: var(--mm-font-family);
+  font-size: var(--mm-text-caption);
+  font-weight: var(--mm-font-weight);
+  line-height: var(--mm-leading-caption);
+  letter-spacing: var(--mm-tracking-normal);
+  color: var(--mm-text-secondary);
+}
+
+/* ─── Small ─── */
+.text-small {
+  font-family: var(--mm-font-family);
+  font-size: var(--mm-text-small);
+  font-weight: var(--mm-font-weight);
+  line-height: var(--mm-leading-caption);
+  letter-spacing: var(--mm-tracking-normal);
+  color: var(--mm-text-muted);
+}
+
+/* ─── Utility: Uppercase Labels ─── */
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 0.85em;
+}
+
+/* ─── Utility: Text on dark surfaces ─── */
+.text-on-dark {
+  color: var(--mm-text-on-dark);
+}
+
+/* ─── Utility: Muted text ─── */
+.text-muted {
+  color: var(--mm-text-muted);
+}
+
+/* ─── Utility: Brand-colored text ─── */
+.text-brand {
+  color: var(--mm-orange);
+}
+
+/* ─── Utility: Gradient text ─── */
+.text-gradient {
+  background: var(--mm-gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Responsive Typography ─── */
+@media (max-width: 1024px) {
+  .text-display {
+    font-size: var(--mm-text-section);
+    letter-spacing: -0.02em;
+  }
+  .text-section {
+    font-size: var(--mm-text-subheading-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .text-display {
+    font-size: var(--mm-text-subheading-lg);
+    letter-spacing: -0.01em;
+  }
+  .text-section {
+    font-size: var(--mm-text-subheading);
+  }
+  .text-subheading-lg {
+    font-size: var(--mm-text-feature);
+  }
+}
+
+@media (max-width: 640px) {
+  .text-display {
+    font-size: var(--mm-text-subheading);
+  }
+  .text-section {
+    font-size: var(--mm-text-feature);
+  }
+  .text-subheading-lg {
+    font-size: var(--mm-text-feature);
+  }
+  .text-subheading {
+    font-size: var(--mm-text-feature);
+  }
+}
