@@ -38,7 +38,7 @@ export class App implements OnInit, OnDestroy {
 
   showLayout = false;
 
-  private authRoutes = ['/login', '/register'];
+  private authRoutes = ['/login', '/register', '/forgot-password', '/reset-password'];
 
   ngOnInit() {
     this.router.events.pipe(

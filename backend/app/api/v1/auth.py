@@ -3,7 +3,8 @@ MindMirror AI — Auth API Routes
 Registration, login, and token management.
 """
 
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+import secrets
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
@@ -21,7 +22,10 @@ from app.models.user import (
     UserProfile,
     UserPreferences,
     TokenResponse,
+    ForgotPasswordRequest,
+    ResetPasswordRequest,
 )
+from app.services.email_service import email_service
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -116,3 +120,60 @@ async def refresh_token(current_user: dict = Depends(get_current_user)):
     )
 
     return TokenResponse(access_token=token, user=profile)
+
+
+@router.post("/forgot-password", status_code=status.HTTP_200_OK)
+async def forgot_password(data: ForgotPasswordRequest):
+    """Initiate a password reset via email verification."""
+    user = await database.users.find_one({"email": data.email})
+    if not user:
+        # Prevent email enumeration by returning a generic success message
+        return {"message": "If an account with that email exists, a password reset link has been sent."}
+
+    # Generate token
+    reset_token = secrets.token_urlsafe(32)
+    expires_at = datetime.now(timezone.utc) + timedelta(hours=1)
+
+    await database.users.update_one(
+        {"_id": user["_id"]},
+        {"$set": {"reset_token": reset_token, "reset_token_expires": expires_at}}
+    )
+
+    # Send verification email
+    email_service.send_password_reset_email(to_email=data.email, reset_token=reset_token)
+
+    return {"message": "If an account with that email exists, a password reset link has been sent."}
+
+
+@router.post("/reset-password", status_code=status.HTTP_200_OK)
+async def reset_password(data: ResetPasswordRequest):
+    """Verify reset token and update user password."""
+    now = datetime.now(timezone.utc)
+    user = await database.users.find_one({
+        "reset_token": data.token,
+        "reset_token_expires": {"$gt": now}
+    })
+
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid or expired password reset token"
+        )
+
+    # Update password and clear token
+    new_password_hash = hash_password(data.new_password)
+    await database.users.update_one(
+        {"_id": user["_id"]},
+        {
+            "$set": {
+                "password_hash": new_password_hash,
+                "updated_at": now
+            },
+            "$unset": {
+                "reset_token": "",
+                "reset_token_expires": ""
+            }
+        }
+    )
+
+    return {"message": "Password has been successfully updated."}
