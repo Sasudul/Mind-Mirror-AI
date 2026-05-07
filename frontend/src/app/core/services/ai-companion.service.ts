@@ -2,6 +2,7 @@ import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EmotionReading } from './emotion-detection.service';
 import { WebSocketService } from './websocket.service';
+import { environment } from '../../../environments/environment';
 
 export interface AiMessage {
   id: number;
@@ -26,9 +27,6 @@ export class AiCompanionService {
   private readonly PROACTIVE_COOLDOWN = 60000; // Minimum 60 seconds of silence before unprompted advice
   private lastProactiveMessage = '';
 
-  /**
-   * Process user speech and generate AI response
-   */
   processUserSpeech(text: string, currentEmotion?: EmotionReading): void {
     // Add user message
     this.addMessage('user', text, currentEmotion?.emotion);
@@ -37,12 +35,12 @@ export class AiCompanionService {
     this.isThinking.set(true);
     
     // Call backend Chat LLM Endpoint
-    const apiUrl = '/api/v1'; // relies on proxy.conf.json or same-origin in prod
+    const apiUrl = environment.apiUrl;
     
     const requestBody = {
       message: text,
       emotion: currentEmotion?.emotion || 'neutral',
-      history: this.messages().slice(-10).map(m => ({ role: m.role, text: m.text })) // Send last 10 messages
+      history: this.messages().slice(-10).map(m => ({ role: m.role, text: m.text }))
     };
 
     this.http.post<{response: string}>(`${apiUrl}/chat`, requestBody).subscribe({
@@ -58,9 +56,6 @@ export class AiCompanionService {
     });
   }
 
-  /**
-   * Process emotion data and potentially trigger proactive responses
-   */
   processEmotion(reading: EmotionReading): void {
     this.emotionHistory.push(reading);
     // Keep last 120 readings (~60 seconds at 500ms intervals)
@@ -90,16 +85,10 @@ export class AiCompanionService {
     });
   }
 
-  /**
-   * Handle text-based input (typing instead of speaking)
-   */
   sendTextMessage(text: string, currentEmotion?: EmotionReading): void {
     this.processUserSpeech(text, currentEmotion);
   }
 
-  /**
-   * Add a direct AI message (for greetings, proactive messages)
-   */
   addAiGreeting(text: string): void {
     this.addMessage('ai', text);
     this.aiMood.set('encouraging');
@@ -116,8 +105,6 @@ export class AiCompanionService {
     this.messages.update(list => [...list, msg]);
     this.lastResponseTime = Date.now();
   }
-
-
 
   private updateAiMood(reading: EmotionReading): void {
     if (['angry', 'fearful', 'disgusted', 'sad'].includes(reading.emotion) && reading.confidence > 0.5) {
