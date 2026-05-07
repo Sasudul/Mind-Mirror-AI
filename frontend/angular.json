@@ -8,7 +8,11 @@
   "projects": {
     "frontend": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "mm",
@@ -30,11 +34,18 @@
               }
             ],
             "styles": [
-              "src/styles/styles.css"
-            ]
+              "src/styles/styles.scss"
+            ],
+            "inlineStyleLanguage": "scss"
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",

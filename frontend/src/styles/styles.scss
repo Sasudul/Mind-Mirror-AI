@@ -3,10 +3,10 @@
    Imports + Global Resets
    =========================================================== */
 
-@import './variables.css';
-@import './typography.css';
-@import './components.css';
-@import './animations.css';
+@use './variables.scss';
+@use './typography.scss';
+@use './components.scss';
+@use './animations.scss';
 
 /* ─── Global Reset ─── */
 

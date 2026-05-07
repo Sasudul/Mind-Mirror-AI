@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface WsMessage {
   type: string;
@@ -27,9 +28,7 @@ export class WebSocketService {
   connect(userId: string): void {
     if (this.ws?.readyState === WebSocket.OPEN) return;
 
-    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-    const host = window.location.host;
-    const url = `${protocol}://${host}/ws/${userId}`;
+    const url = `${environment.wsUrl}/${userId}`;
 
     try {
       this.ws = new WebSocket(url);
